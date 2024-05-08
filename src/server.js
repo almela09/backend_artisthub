@@ -21,6 +21,7 @@ app.get('/api/healthy', (req, res) => {
 
 app.use('/api', router)
 
+
 dbConnection()
   .then(() => {
     console.log("Database connected");
