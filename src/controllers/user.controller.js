@@ -131,54 +131,54 @@ export const updateUserProfile = async (req, res) => {
 // };
 
 const storage = multer.diskStorage({
-    destination: function(req, file, cb) {
-      cb(null, './uploads/');
-    },
-    filename: function(req, file, cb) {
-      cb(null, new Date().toISOString() + file.originalname);
+  destination: function(req, file, cb) {
+    cb(null, './uploads/');
+  },
+  filename: function(req, file, cb) {
+    cb(null, new Date().toISOString() + file.originalname);
+  }
+});
+
+const upload = multer({ storage: storage });
+
+export const uploadUserProfileImage = async (req, res) => {
+    try {
+        upload.single('avatar')(req, res, async function(err) {
+            if (err instanceof multer.MulterError) {
+                return res.status(500).json({
+                    success: false,
+                    message: 'Multer error during upload',
+                    error: err.message
+                });
+            } else if (err) {
+                return res.status(500).json({
+                    success: false,
+                    message: 'Unknown error during upload',
+                    error: err.message
+                });
+            }
+
+            try {
+                // Aquí, la imagen ha sido cargada y puedes acceder a ella a través de req.file
+                const user = await User.findByIdAndUpdate(req.tokenData.userId, { avatar: req.file.path }, { new: true });
+                res.json({
+                    success: true,
+                    message: 'Profile image uploaded successfully',
+                    data: user
+                });
+            } catch (error) {
+                res.status(500).json({
+                    success: false,
+                    message: 'Error updating user profile',
+                    error: error.message
+                });
+            }
+        });
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error updating user profile',
+            error: error.message
+        });
     }
-  });
-  
-  const upload = multer({ storage: storage });
-  
-  export const uploadUserProfileImage = async (req, res) => {
-      try {
-          upload.single('avatar')(req, res, async function(err) {
-              if (err instanceof multer.MulterError) {
-                  return res.status(500).json({
-                      success: false,
-                      message: 'Multer error during upload',
-                      error: err.message
-                  });
-              } else if (err) {
-                  return res.status(500).json({
-                      success: false,
-                      message: 'Unknown error during upload',
-                      error: err.message
-                  });
-              }
-  
-              try {
-                  // Aquí, la imagen ha sido cargada y puedes acceder a ella a través de req.file
-                  const user = await User.findByIdAndUpdate(req.tokenData.userId, { avatar: req.file.path }, { new: true });
-                  res.json({
-                      success: true,
-                      message: 'Profile image uploaded successfully',
-                      data: user
-                  });
-              } catch (error) {
-                  res.status(500).json({
-                      success: false,
-                      message: 'Error updating user profile',
-                      error: error.message
-                  });
-              }
-          });
-      } catch (error) {
-          res.status(500).json({
-              success: false,
-              message: 'Error updating user profile',
-              error: error.message
-          });
-      }
-  };
+};
