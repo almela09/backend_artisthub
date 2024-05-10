@@ -1,38 +1,24 @@
-// import multer from 'multer';
-// import path from 'path';
+import multer from 'multer';
+import cloudinary from 'cloudinary';
+import { CloudinaryStorage } from 'multer-storage-cloudinary';
+import dotenv from 'dotenv';
 
-// const storage = multer.diskStorage({
-//     destination: function(req, file, cb) {
-//         cb(null, path.join(__dirname, '../uploads')); // Asegúrate de que esta carpeta exista
-//     },
-//     filename: function(req, file, cb) {
-//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-//     }
-// });
+//config multer y cloudinary, datos en .env
 
-// const upload = multer({ storage: storage });
+dotenv.config();
+cloudinary.v2.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+  });
 
-// export default upload;
+  const storage = new CloudinaryStorage({
+    cloudinary: cloudinary.v2,
+    params: {
+      folder: 'some_folder_name',
+      format: async (req, file) => 'png',
+      public_id: (req, file) => 'computed-filename-using-request',
+    },
+  }); 
 
-// import multer from 'multer';
-// import path from 'path';
-// import { fileURLToPath } from 'url';
-// import { dirname } from 'path';
-
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = dirname(__filename);
-
-// const storage = multer.diskStorage({
-//     destination: function(req, file, cb) {
-//         cb(null, path.join(__dirname, '../uploads')); // Asegúrate de que esta carpeta exista
-//     },
-//     filename: function(req, file, cb) {
-//         const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-//         cb(null, file.fieldname + '-' + uniqueSuffix + path.extname(file.originalname));
-//     }
-// });
-
-// const upload = multer({ storage: storage });
-
-// export default upload;
+  export const upload = multer({ storage: storage });

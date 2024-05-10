@@ -11,25 +11,25 @@ app.use(cors())
 const PORT = process.env.PORT || 4001;
 
 app.get('/api/healthy', (req, res) => {
-  res.status(200).json(
-    {
-      success: true,
-      message: "server is healthy"
-    }
-  )
+    res.status(200).json(
+        {
+            success: true,
+            message: "server is healthy"
+        }
+    )
 })
 
 app.use('/api', router)
 
 
 dbConnection()
-  .then(() => {
-    console.log("Database connected");
+    .then(() => {
+        console.log("Database connected");
 
-    app.listen(PORT, () => {
-      console.log(`Server running o port ${PORT}`);
+        app.listen(PORT, () => {
+            console.log(`Server running o port ${PORT}`);
+        })
     })
-  })
-  .catch(error => {
-    console.log(error);
-  })
+    .catch(error => {
+        console.log(error);
+    })
