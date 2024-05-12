@@ -18,5 +18,4 @@ const createFakeUsers = async () => {
     await createFakeUser();
   }
 };
-
 createFakeUsers();

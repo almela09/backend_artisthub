@@ -1,4 +1,4 @@
-import { upload } from './config/multerConfig.js';
+import { upload } from '../config/multerConfig.js';
 import Publication from '../models/Publication.js';
 import cloudinary from 'cloudinary';
 
