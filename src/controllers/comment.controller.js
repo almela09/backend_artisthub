@@ -1,6 +1,6 @@
 import Comment from "../models/Comment";
 
-export const createComent = async (req, res) => {
+export const createComment = async (req, res) => {
     const { content, publicationId, userId } = req.body;
 
     try {
@@ -13,7 +13,7 @@ export const createComent = async (req, res) => {
     }
 };
 
-export const getComents = async (req, res) => {
+export const getComments = async (req, res) => {
     try {
         const comments = await Comment.find();
         res.status(200).json({ comments });
@@ -22,7 +22,7 @@ export const getComents = async (req, res) => {
     }
 };
 
-export const getComent = async (req, res) => {
+export const getComment = async (req, res) => {
     const { id } = req.params;
 
     try {
@@ -37,7 +37,7 @@ export const getComent = async (req, res) => {
     }
 };
 
-export const updateComent = async (req, res) => {
+export const updateComment = async (req, res) => {
     const { id } = req.params;
     const { content } = req.body;
 
@@ -54,7 +54,7 @@ export const updateComent = async (req, res) => {
 };
 
 
-export const deleteComent = async (req, res) => {
+export const deleteComment = async (req, res) => {
     const { id } = req.params;
 
     try {
