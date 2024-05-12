@@ -1,5 +1,7 @@
 import { upload } from './config/multerConfig.js';
 import Publication from '../models/Publication.js';
+import cloudinary from 'cloudinary';
+
 export const createPublication = async (req, res) => {
   // Usar Multer para manejar la carga de la imagen
   upload.single('image')(req, res, async function (err) {
@@ -98,3 +100,35 @@ export const updatePublication = async (req, res) => {
       }
   });
 }; 
+
+export const deletePublication = async (req, res) => {
+  try {
+      // Obtener la ID de la publicación desde los parámetros de la URL
+      const publicationId = req.params.id;
+
+      // Buscar y eliminar la publicación
+      const deletedPublication = await Publication.findByIdAndDelete(publicationId);
+
+      // Si la publicación no se encuentra, devolver un error 404
+      if (!deletedPublication) {
+          return res.status(404).json({
+              success: false,
+              message: 'Publication not found'
+          });
+      }
+
+      // Responder con éxito si la publicación se eliminó correctamente
+      res.status(200).json({
+          success: true,
+          message: 'Publication deleted successfully',
+          publication: deletedPublication
+      });
+  } catch (error) {
+      // Manejar errores y devolver un estado 500
+      res.status(500).json({
+          success: false,
+          message: 'Error deleting publication',
+          error: error.message
+      });
+  }
+};
