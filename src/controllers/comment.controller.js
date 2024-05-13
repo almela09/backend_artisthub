@@ -1,5 +1,4 @@
-import Comment from '../models/Comment';
-
+import Comment from "../models/Comment.js"
 export const createComment = async (req, res) => {
     const { content, publicationId, userId } = req.body;
 
@@ -68,3 +67,5 @@ export const deleteComment = async (req, res) => {
         res.status(500).json({ message: 'Error deleting comment', error });
     }
 };
+
+
