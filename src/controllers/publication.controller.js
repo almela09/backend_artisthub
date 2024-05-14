@@ -111,3 +111,74 @@ export const deletePublication = async (req, res) => {
     });
   }
 };
+
+
+export const putLikes = async (req, res) => {
+  try {
+      const publicationId = req.params.id;
+      const userId = req.tokenData.userId;
+      const findPublication = await Publication.findById(publicationId);
+      if (!findPublication) {
+          return res.status(404).json({
+              success: false,
+              message: "Publication not found"
+          });
+      }
+      const index = findPublication.like.indexOf(userId);
+      if (index > -1) {
+          findPublication.like.splice(index, 1);
+      } else {
+          findPublication.like.push(userId);
+      }
+
+      await findPublication.save();
+
+      res.status(200).json({
+          success: true,
+          message: "Publication like status updated successfully",
+          data: findPublication
+      });
+  } catch (error) {
+      res.status(500).json({
+          success: false,
+          message: "Error updating publication like status",
+          error: error.message
+      });
+  }
+};
+
+export const removeLikes = async (req, res) => {
+  try {
+      const publicationId = req.params.id;
+      const userId = req.tokenData.userId;
+      const findPublication = await Publication.findById(publicationId);
+      if (!findPublication) {
+          return res.status(404).json({
+              success: false,
+              message: "Publication not found"
+          });
+      }
+      const index = findPublication.like.indexOf(userId);
+      if (index > -1) {
+          findPublication.like.splice(index, 1); // Remove like if found
+          await findPublication.save();
+          res.status(200).json({
+              success: true,
+              message: "Like removed successfully",
+              data: findPublication
+          });
+      } else {
+          res.status(200).json({
+              success: false,
+              message: "Like not found on this publication",
+              data: findPublication
+          });
+      }
+  } catch (error) {
+      res.status(500).json({
+          success: false,
+          message: "Error removing like",
+          error: error.message
+      });
+  }
+};
