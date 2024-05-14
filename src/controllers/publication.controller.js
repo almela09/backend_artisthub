@@ -182,3 +182,26 @@ export const removeLikes = async (req, res) => {
       });
   }
 };
+
+export const getAllPublications = async (req, res) => {
+  try {
+      const findPublications = await Publication.find({});
+      if (findPublications.length === 0) {
+          return res.status(404).json({
+              success: false,
+              message: "No publications found"
+          });
+      }
+      res.status(200).json({
+          success: true,
+          message: "All publications retrieved",
+          data: findPublications
+      });
+  } catch (error) {
+      res.status(500).json({
+          success: false,
+          message: "Publications didn't retrieved",
+          error: error.message
+      });
+  }
+};

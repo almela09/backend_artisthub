@@ -10,7 +10,8 @@ const router= Router();
 router.post('/', auth, upload.single('image'), createPublication);
 router.put('/:id', auth, upload.single('image'), updatePublication);
 router.delete('/:id', auth, deletePublication);
-router.put('/publications/:id/likes', putLikes);
-router.delete('/publications/:id/likes', removeLikes);
+router.put('/:id/likes', putLikes);
+router.delete('/:id/likes', removeLikes);
+router.delete('/:id', deletePublication);
 
 export default router; 
