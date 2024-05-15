@@ -14,5 +14,5 @@ router.put('/:id/likes', putLikes);
 router.delete('/:id/likes', removeLikes);
 router.get('/publications', getAllPublications); //publication/publications
 router.get('/publications/:id', getPublicationById); //publication/publications/:id
-router.get('/publications/user/:userId', getPublicationsByUser);
+router.get('/publications/user/:userId', getPublicationsByUser); //
 export default router; 
