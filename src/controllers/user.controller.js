@@ -161,6 +161,7 @@ export const updateUserProfile = async (req, res) => {
             name: req.body.name,
             nick: req.body.nick,
             biography: req.body.biography,
+            socialNetwork: req.body.socialNetwork,
         };
 
         // Si se subió una imagen, agrega la URL de la imagen a los datos de actualización
