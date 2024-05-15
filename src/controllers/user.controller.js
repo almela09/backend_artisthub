@@ -1,6 +1,6 @@
 import User from "../models/User.js"
 import { upload } from '../config/multerConfig.js';
-
+import { v2 as cloudinary } from 'cloudinary';
 
 export const getAllUser = async (req, res) => {
     try {

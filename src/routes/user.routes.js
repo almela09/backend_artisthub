@@ -11,6 +11,6 @@ router.get('/', auth, isSuperAdmin, getAllUser);
 router.get('/profile', auth, getUserProfile); 
 // router.post('/image', upload.single('avatar'), uploadUserProfileImage);
 // router.post('/image', uploadUserProfileImage);
-router.put('/users', auth, updateUserProfile);
-
+// router.put('/users', auth, updateUserProfile);
+router.put('/users/:id', auth, updateUserProfile);
 export default router; 
