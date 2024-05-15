@@ -221,3 +221,20 @@ export const getPublicationById = async (req, res) => {
       res.status(500).json({ message: 'Error retrieving publication', error: error.message }); // Si hay un error, devuélvelo en la respuesta
   }
 };
+
+export const getPublicationsByUser = async (req, res) => {
+  const { userId } = req.params; // Obtén el ID del usuario de los parámetros de la ruta
+
+  try {
+      const publications = await Publication.find({ user: userId }); // Busca todas las publicaciones que tengan un campo 'user' que coincida con el ID del usuario
+
+      if (!publications) {
+          return res.status(404).json({ message: 'Publications not found' }); // Si no se encuentran publicaciones, devuelve un error 404
+      }
+
+      res.status(200).json(publications); // Si se encuentran publicaciones, devuélvelas en la respuesta
+  } catch (error) {
+      res.status(500).json({ message: 'Error retrieving publications', error: error.message }); // Si hay un error, devuélvelo en la respuesta
+  }
+};
+//DELETE PUBLICATION BY ID
