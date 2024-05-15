@@ -46,6 +46,7 @@ export const getUserProfile = async (req, res) => {
             biography: user.biography,
             avatar: user.avatar,
             email: user.email,
+            socialNetwork: user.socialNetwork
         };
         res.json(userProfile);
     } catch (error) {
