@@ -29,18 +29,15 @@ export const getAllUser = async (req, res) => {
 
 export const getUserProfile = async (req, res) => {
     try {
-        //console.log(req);
         const user = await User.findById(req.tokenData.userId);
         if (!user) {
-            return res.status(404).json(
-                {
-                    success: false,
-                    message: 'user not found',
-                    error: error.message
-                }
-            );
+            return res.status(404).json({
+                success: false,
+                message: 'User not found',
+            });
         }
         const userProfile = {
+            _id: user._id, 
             name: user.name,
             nick: user.nick,
             biography: user.biography,
@@ -50,13 +47,11 @@ export const getUserProfile = async (req, res) => {
         };
         res.json(userProfile);
     } catch (error) {
-        res.status(500).json(
-            {
-                success: false,
-                message: 'Error obtaining the user profile',
-                error: error.message
-            }
-        )
+        res.status(500).json({
+            success: false,
+            message: 'Error obtaining the user profile',
+            error: error.message
+        });
     }
 };
 
