@@ -205,3 +205,19 @@ export const getAllPublications = async (req, res) => {
       });
   }
 };
+
+export const getPublicationById = async (req, res) => {
+  const { id } = req.params; // Obtén el ID de la publicación de los parámetros de la ruta
+
+  try {
+      const publication = await Publication.findById(id); // Busca la publicación por su ID
+
+      if (!publication) {
+          return res.status(404).json({ message: 'Publication not found' }); // Si no se encuentra la publicación, devuelve un error 404
+      }
+
+      res.status(200).json(publication); // Si se encuentra la publicación, devuélvela en la respuesta
+  } catch (error) {
+      res.status(500).json({ message: 'Error retrieving publication', error: error.message }); // Si hay un error, devuélvelo en la respuesta
+  }
+};

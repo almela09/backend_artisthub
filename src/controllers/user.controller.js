@@ -54,84 +54,6 @@ export const getUserProfile = async (req, res) => {
         });
     }
 };
-
-// export const updateUserProfile = async (req, res) => {
-//     const userId = req.params.id;
-//     const updateData = req.body;
-//     try {
-//         const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
-//         if (!updatedUser) {
-//             return res.status(404).json(
-//                 {
-//                     message: 'User not found'
-
-//                 },
-//                 res.status(200).json(
-//                     {
-//                         message: 'profile update success',
-//                         user: updatedUser
-//                     }
-//                 )
-//             );
-//         }
-//     } catch (error) {
-//         res.status(500).json(
-//             {
-//                 message: "update profile fails",
-//                 error: error
-//             }
-//         )
-//     }
-// };
-
-// export const updateUserProfile = async (req, res) => {
-//     // Usar Multer para manejar la carga de la imagen
-//     upload.single('image')(req, res, async function (err) {
-//         if (err) {
-//             return res.status(500).json({ error: err.message });
-//         }
-
-//         // Si hay un archivo en la solicitud, sube a Cloudinary
-//         let imageUrl;
-//         if (req.file) {
-//             try {
-//                 const result = await cloudinary.uploader.upload(req.file.path);
-//                 imageUrl = result.secure_url;
-//             } catch (uploadError) {
-//                 return res.status(500).json({ error: 'Error uploading image to Cloudinary', details: uploadError.message });
-//             }
-//         }
-
-//         // Datos de usuario a actualizar
-
-//         const userId = req.params.id;
-//         const updateData = req.body;
-
-//         // Si se subió una imagen, agrega la URL de la imagen a los datos de actualización
-//         if (imageUrl) {
-//             updateData.avatar = imageUrl;
-//         }
-
-//         try {
-//             // Actualizar el perfil del usuario en la base de datos
-//             const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true });
-//             if (!updatedUser) {
-//                 return res.status(404).json({ message: 'User not found' });
-//             }
-
-//             res.status(200).json({
-//                 message: 'Profile update successful',
-//                 user: updatedUser
-//             });
-//         } catch (dbError) {
-//             res.status(500).json({
-//                 message: "Update profile failed",
-//                 error: dbError.message
-//             });
-//         }
-//     });
-// };
-
 export const updateUserProfile = async (req, res) => {
     // Usar Multer para manejar la carga de la imagen
     upload.single('image')(req, res, async function (err) {
@@ -184,3 +106,6 @@ export const updateUserProfile = async (req, res) => {
     });
 };
 
+
+
+//DELETE
