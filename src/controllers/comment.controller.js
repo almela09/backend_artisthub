@@ -12,7 +12,7 @@ export const createComment = async (req, res) => {
     }
 };
 
-export const getComments = async (req, res) => {
+export const getComments = async (req, res) => {    //todos los comentarios
     try {
         const comments = await Comment.find();
         res.status(200).json({ comments });
@@ -21,7 +21,7 @@ export const getComments = async (req, res) => {
     }
 };
 
-export const getComment = async (req, res) => {
+export const getComment = async (req, res) => {    //byId
     const { id } = req.params;
 
     try {

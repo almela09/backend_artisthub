@@ -207,18 +207,18 @@ export const getAllPublications = async (req, res) => {
 };
 
 export const getPublicationById = async (req, res) => {
-  const { id } = req.params; // Obtén el ID de la publicación de los parámetros de la ruta
+  const { id } = req.params; 
 
   try {
-      const publication = await Publication.findById(id); // Busca la publicación por su ID
+      const publication = await Publication.findById(id); 
 
       if (!publication) {
-          return res.status(404).json({ message: 'Publication not found' }); // Si no se encuentra la publicación, devuelve un error 404
+          return res.status(404).json({ message: 'Publication not found' }); 
       }
 
-      res.status(200).json(publication); // Si se encuentra la publicación, devuélvela en la respuesta
+      res.status(200).json(publication); 
   } catch (error) {
-      res.status(500).json({ message: 'Error retrieving publication', error: error.message }); // Si hay un error, devuélvelo en la respuesta
+      res.status(500).json({ message: 'Error retrieving publication', error: error.message }); 
   }
 };
 
