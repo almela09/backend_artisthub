@@ -206,7 +206,7 @@ export const getAllPublications = async (req, res) => {
   }
 };
 
-export const getPublicationById = async (req, res) => {
+export const getPublicationById = async (req, res) => {  //UNA PUBLICACION POR ID
   const { id } = req.params; 
 
   try {
@@ -222,19 +222,29 @@ export const getPublicationById = async (req, res) => {
   }
 };
 
-export const getPublicationsByUser = async (req, res) => {
-  const { userId } = req.params; // Obtén el ID del usuario de los parámetros de la ruta
+
+
+export const getAllPublicationsByUser = async (req, res) => {
+  const { userId } = req.params;
 
   try {
-      const publications = await Publication.find({ user: userId }); // Busca todas las publicaciones que tengan un campo 'user' que coincida con el ID del usuario
+      console.log(`Buscando publicaciones para el usuario con ID: ${userId}`);
 
-      if (!publications) {
-          return res.status(404).json({ message: 'Publications not found' }); // Si no se encuentran publicaciones, devuelve un error 404
+      // Usa `populate` para reemplazar el ID del usuario con el documento de usuario completo
+      const publications = await Publication.find({ user: userId }).populate('user');
+
+      if (!publications || publications.length === 0) {
+          console.log('No se encontraron publicaciones para el usuario especificado.');
+          return res.status(404).json({ message: 'Publications not found' });
       }
 
-      res.status(200).json(publications); // Si se encuentran publicaciones, devuélvelas en la respuesta
+      console.log('Publicaciones encontradas:', publications);
+      res.status(200).json(publications);
   } catch (error) {
-      res.status(500).json({ message: 'Error retrieving publications', error: error.message }); // Si hay un error, devuélvelo en la respuesta
+      console.error('Error al recuperar las publicaciones:', error);
+      res.status(500).json({ message: 'Error retrieving publications', error: error.message });
   }
 };
-//DELETE PUBLICATION BY ID
+
+//PUBLICACIONES DE 1 USUARIO TODAS.
+
