@@ -11,7 +11,7 @@ router.post('/', auth, upload.single('image'), createPublication);
 router.put('/:id', auth, upload.single('image'), updatePublication);
 router.delete('/:id', auth, deletePublication);
 router.put('/:id/likes',auth, putLikes);
-router.delete('/:id/likes',auth, removeLikes);
+router.delete('/:id/dislike',auth, removeLikes);
 router.get('/publications', getAllPublications); //publication/publications
 router.get('/publications/:id', getPublicationById); //publication/publications/:id
 router.get('/publications/user/:userId', getPublicationsByUser); //
