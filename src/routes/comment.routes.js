@@ -1,10 +1,11 @@
 import { Router } from "express";
-import { createComment, deleteComment, getComment, getComments, updateComment } from "../controllers/comment.controller.js";
+import { createComment, deleteComment, getComment, getComments, updateComment, getCommentsByPublicationId } from "../controllers/comment.controller.js";
 import { auth } from "../middleware/auth.middleware.js";
 
 const router= Router();
 router.post('/', auth, createComment);
 router.get('/', getComments);
+router.get('/:id/comments', getCommentsByPublicationId);
 router.get('/:id', getComment);
 router.put('/:id', auth, updateComment);
 router.delete('/:id', auth, deleteComment);

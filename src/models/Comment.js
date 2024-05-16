@@ -1,23 +1,19 @@
 import { Schema, model } from "mongoose";
 
 const commentSchema = new Schema({
-
     content: {
         type: String,
         required: true
     },
-
     createdAt: {
         type: Date,
         default: Date.now
     },
-
     publicationId: {
         type: Schema.Types.ObjectId,
-        ref: 'Post',
+        ref: 'Publication',
         required: true
-    }
-    ,
+    },
     userId: {
         type: Schema.Types.ObjectId,
         ref: 'User',
@@ -26,4 +22,4 @@ const commentSchema = new Schema({
 });
 
 const Comment = model('Comment', commentSchema)
-export default Comment;
+export default Comment; 

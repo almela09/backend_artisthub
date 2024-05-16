@@ -206,21 +206,19 @@ export const getAllPublications = async (req, res) => {
   }
 };
 
-export const getPublicationById = async (req, res) => {  //UNA PUBLICACION POR ID
-  const { id } = req.params; 
-
+export const getPublicationById = async (req, res) => {
+  const { id } = req.params;
   try {
-      const publication = await Publication.findById(id); 
-
-      if (!publication) {
-          return res.status(404).json({ message: 'Publication not found' }); 
-      }
-
-      res.status(200).json(publication); 
+    const publication = await Publication.findById(id).populate('user');
+    if (!publication) {
+      return res.status(404).json({ message: 'Publication not found' });
+    }
+    res.status(200).json(publication);
   } catch (error) {
-      res.status(500).json({ message: 'Error retrieving publication', error: error.message }); 
+    res.status(500).json({ message: 'Error fetching publication', error: error.message });
   }
 };
+
 
 
 

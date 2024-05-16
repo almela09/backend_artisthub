@@ -9,6 +9,7 @@ import { createPublication,
     removeLikes, 
     getAllPublications,  
     getAllPublicationsByUser, 
+    getPublicationById
      } from "../controllers/publication.controller.js";
 
 // const upload = multer({ storage: multer.memoryStorage() });
@@ -21,6 +22,7 @@ router.put('/:id/likes', auth, putLikes);
 router.delete('/:id/dislike', auth, removeLikes);
 router.get('/publications', getAllPublications); //publication/publications
 router.get('/publications/:userId',auth, getAllPublicationsByUser); //publication/publications/:id
+router.get('/:id', getPublicationById)
 // router.get('/publications/user/:userId', getPublicationsByUser); //
 // router.get('/publications/:userId', auth, getUserAllPublicationsById);
 export default router; 
