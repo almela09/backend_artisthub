@@ -21,7 +21,7 @@ router.delete('/:id', auth, deletePublication);
 router.put('/:id/likes', auth, putLikes);
 router.delete('/:id/dislike', auth, removeLikes);
 router.get('/publications', getAllPublications); //publication/publications
-router.get('/publications/:userId',auth, getAllPublicationsByUser); //publication/publications/:id
+router.get('/publications/:userId', getAllPublicationsByUser); //publication/publications/:id
 router.get('/:id', getPublicationById)
 // router.get('/publications/user/:userId', getPublicationsByUser); //
 // router.get('/publications/:userId', auth, getUserAllPublicationsById);
