@@ -7,7 +7,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.js",
-    "seed": "node ./src/database/seeders/fake.users.js",
+    "seed": "node ./src/database/seeders/seed.js",
     "start": "node ./src/server.js"
   },
   "author": "",
