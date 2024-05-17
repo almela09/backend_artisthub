@@ -106,6 +106,44 @@ export const updateUserProfile = async (req, res) => {
     });
 };
 
+export const deleteUser = async (req, res) => {
+    const { userId } = req.params;
 
+    try {
+        if (req.tokenData.userId && req.tokenData.roleName === 'super_admin') {
+            if (req.tokenData.userId === userId) {
+                return res.status(403).json({
+                    success: false,
+                    message: 'Super admin cannot delete themselves'
+                });
+            }
+
+            const user = await User.findById(userId);
+            if (!user) {
+                return res.status(404).json({
+                    success: false,
+                    message: 'User not found'
+                });
+            }
+
+            await User.deleteOne({ _id: userId });
+            res.json({
+                success: true,
+                message: 'User deleted successfully'
+            });
+        } else {
+            res.status(403).json({
+                success: false,
+                message: 'Access denied, only super admin allowed'
+            });
+        }
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: 'Error deleting user',
+            error: error
+        });
+    }
+};
 
 //DELETE
