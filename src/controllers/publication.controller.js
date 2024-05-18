@@ -212,9 +212,6 @@ export const getPublicationById = async (req, res) => {
   }
 };
 
-
-
-
 export const getAllPublicationsByUser = async (req, res) => {
   const { userId } = req.params;
 

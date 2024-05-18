@@ -1,7 +1,7 @@
 
 # Backend Artist/Hub 
 
-<image src="./img/chicamovil.jpg" alt="Red Social">
+
 
 ### Tabla de contenidos:
 
@@ -9,7 +9,6 @@
 - [Especificaciones](#especificaciones-)
 - [Stack](#stack-)
 - [Instalacion en local](#instalación-en-local-)
-- [Diseño Base de Datos](#diseño-base-de-datos-)
 - [Endpoints](#endpoints-)
 - [Autor](#autor-)
 
@@ -32,3 +31,105 @@ Se han utilizado las siguientes tecnologías:
 
 ![Nodemon](https://img.shields.io/badge/Nodemon-%2766CC33?style=for-the-badge&logo=nodemon&logoColor=white)
 
+### Instalación en local:
+
+1. Clonar repositorio.
+
+2. Instalar dependencias: `$ npm install`.
+3. Crear una conexión con MongoAtlas.
+4. Conectar el repositorio en Mongo Compass.
+5. Ejecutar seeders: `$ npm run seeder`.
+6. Poner en marcha el servidor `$ npm run dev`.
+
+### Endpoints
+    -Credenciales:
+
+        {
+            "email": "suepradmin@example.com",
+            "password": "123456789"
+        }
+
+        
+        {
+            "email": "paula@paula.com",
+            "password": "123456"
+        }
+
+
+ AUTH:
+        
+        Login:
+            http://localhost:4000/api/auth/login
+
+              {
+                "email": "paula@paula.com",
+                "password": "123456"
+                }
+        
+        Register:
+            {
+                "name": "Leonor",
+                "nick": "Leo",
+                "email": "leo@leo.com",
+                "password": "123456"
+            }
+USER:
+
+        Superadmin only:
+
+        GET: http://localhost:4000/api/user [Ver todos los usuarios]
+        DELETE: http://localhost:4000/api/user/:userId [Borrar usuarios]
+
+        GET: http://localhost:4000/api/user/profile [Ver perfil usuario]
+        PUT: http://localhost:4000/api/user/users/:id [Editar perfil]
+
+PUBLICATION:
+
+        POST: http://localhost:4000/api/publication [Crear publicación]
+
+                form-data
+                    Key:                Value:
+                    Title               tu titulo 
+                    Text                tu texto
+                    Image (seleccionar file)
+<image src="./images/formdata.png" alt="formdata">
+
+        PUT: http://localhost:4000/api/publication/:id [Editar publicación]
+
+            {
+                "title": "Nuevo título de la publicación",
+                "text": "Nuevo texto de la publicación"
+            }
+        
+        DELETE: http://localhost:4000/api/publication/:id [Eliminar publicación]
+
+        PUT: http://localhost:4000/api/publication/:id/likes [Dar like]
+
+        DELETE: http://localhost:4000/api/publication/:id/dislike [Quitar like]
+
+        GET: http://localhost:4000/api/publication/publications/:userId [Obtener TODAS las publicacines de un usuario]
+
+        GET: http://localhost:4000/api/publication/:id [Busca publicación específica por su id]
+
+COMMENT:
+
+    POST: http://localhost:4000/api/comment [Crear comentario]
+
+            {
+                "content": "Muy bonito!!!! me encanta",
+                "publicationId": "6644df96575766b87193253d",
+                "userId": "66439af3100c17d40e0c4eb0"
+            }
+    GET: http://localhost:4000/api/comment [ver todos los  comentarios]
+
+    GET: http://localhost:4000/api/comment/:publicationId [ver comentarios asociados a una publicación]
+
+    PUT: http://localhost:4000/api/comment/:id [editar comentario]  
+
+            {
+                "content": "Nuevo contenido del comentario"
+            }
+    DELETE:  http://localhost:4000/api/comment/:id [borrar comentario]
+
+#### Autor:
+Paula Almela.
