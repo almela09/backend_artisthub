@@ -31,6 +31,10 @@ Se han utilizado las siguientes tecnologías:
 
 ![Nodemon](https://img.shields.io/badge/Nodemon-%2766CC33?style=for-the-badge&logo=nodemon&logoColor=white)
 
+![Cloudinary](https://img.shields.io/badge/Cloudinary-%2334314E?style=for-the-badge&logo=cloudinary&logoColor=white)
+![Multer](https://img.shields.io/badge/Multer-%23323330?style=for-the-badge&logo=multer&logoColor=white)
+
+
 ### Instalación en local:
 
 1. Clonar repositorio.
@@ -38,7 +42,7 @@ Se han utilizado las siguientes tecnologías:
 2. Instalar dependencias: `$ npm install`.
 3. Crear una conexión con MongoAtlas.
 4. Conectar el repositorio en Mongo Compass.
-5. Ejecutar seeders: `$ npm run seeder`.
+5. Ejecutar seeders: `$ npm run seed`.
 6. Poner en marcha el servidor `$ npm run dev`.
 
 ### Endpoints
