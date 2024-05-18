@@ -2,8 +2,6 @@ import { Router } from "express";
 import {isSuperAdmin} from "../middleware/isSuperAdmin.js"
 import { auth } from "../middleware/auth.middleware.js";
 import { getAllUser, getUserProfile, updateUserProfile, deleteUser} from "../controllers/user.controller.js";
-// import upload from '../config/multerConfig.js';
-
 
 const router= Router();
 

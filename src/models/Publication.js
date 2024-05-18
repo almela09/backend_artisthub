@@ -24,7 +24,7 @@ const PublicationSchema = new Schema({
         type: Date,
         default: Date.now,
     },
-    like: [
+    likes: [
         {
             type: Schema.Types.ObjectId,
             ref: 'User',
