@@ -3,18 +3,17 @@ import Comment from "../models/Comment.js"
 export const createComment = async (req, res) => {
     const { content, publicationId } = req.body;
     const { userId } = req.tokenData; // Extraer userId de req.tokenData
-    console.log('createComment function called');
 
     if (!content || content.trim() === '' || !publicationId || !userId) {
-        console.log('Missing or invalid required fields');
+
         return res.status(400).json({ message: 'Missing or invalid required fields' });
     }
 
     try {
         const comment = new Comment({ content, publicationId, userId });
-        console.log(`Comment to be saved: ${JSON.stringify(comment)}`);
+
         await comment.save();
-        console.log('Comment saved');
+
         res.status(201).json({ message: 'Comment created', comment });
     } catch (error) {
         console.log(`Error: ${error.message}`);

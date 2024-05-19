@@ -8,7 +8,7 @@ export const getAllUser = async (req, res) => {
             const users = await User.find({});
             res.json(users);
         } else {
-            //devolver aqui el error si no es super_admin
+            
             res.status(403).json(
                 {
                     success: false,
@@ -55,13 +55,13 @@ export const getUserProfile = async (req, res) => {
     }
 };
 export const updateUserProfile = async (req, res) => {
-    // Usar Multer para manejar la carga de la imagen
+    
     upload.single('image')(req, res, async function (err) {
         if (err) {
             return res.status(500).json({ error: err.message });
         }
 
-        // Si hay un archivo en la solicitud, sube a Cloudinary
+        
         let imageUrl;
         if (req.file) {
             try {
@@ -72,7 +72,7 @@ export const updateUserProfile = async (req, res) => {
             }
         }
 
-        // Datos de usuario a actualizar
+        
         const userId = req.params.id;
         const updateData = {
             name: req.body.name,
@@ -81,13 +81,13 @@ export const updateUserProfile = async (req, res) => {
             socialNetwork: req.body.socialNetwork,
         };
 
-        // Si se subió una imagen, agrega la URL de la imagen a los datos de actualización
+        
         if (imageUrl) {
             updateData.avatar = imageUrl;
         }
 
         try {
-            // Actualizar el perfil del usuario en la base de datos
+           
             const updatedUser = await User.findByIdAndUpdate(userId, updateData, { new: true, runValidators: true });
             if (!updatedUser) {
                 return res.status(404).json({ message: 'User not found' });

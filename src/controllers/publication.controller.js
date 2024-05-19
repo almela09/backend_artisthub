@@ -1,19 +1,19 @@
 import { upload } from '../config/multerConfig.js';
 import Publication from '../models/Publication.js';
 export const createPublication = async (req, res) => {
-  // Verificar si req.file está disponible
+
   let imageUrl = '';
   if (req.file && req.file.path) {
     imageUrl = req.file.path;
   }
 
-  // Datos de publicación a crear
+
   const { title, text } = req.body;
-  const userId = req.tokenData.userId;  // Asume que userId está en tokenData
+  const userId = req.tokenData.userId;
 
   const newPublication = new Publication({
     user: userId,
-    title: title || '',  // Proporciona un título vacío si no se proporciona
+    title: title || '',
     text,
     image: imageUrl,
     publishedAt: Date.now(),
@@ -21,7 +21,7 @@ export const createPublication = async (req, res) => {
   });
 
   try {
-    // Guardar la nueva publicación en la base de datos
+
     const savedPublication = await newPublication.save();
     res.status(201).json({
       message: 'Publication created successfully',
@@ -54,7 +54,7 @@ export const updatePublication = async (req, res) => {
   const updateData = {
     title,
     text
-    
+
   };
 
 
@@ -214,25 +214,16 @@ export const getPublicationById = async (req, res) => {
 
 export const getAllPublicationsByUser = async (req, res) => {
   const { userId } = req.params;
-
   try {
-    console.log(`Buscando publicaciones para el usuario con ID: ${userId}`);
-
-    // Usa `populate` para reemplazar el ID del usuario con el documento de usuario completo
     const publications = await Publication.find({ user: userId }).populate('user');
-
     if (!publications || publications.length === 0) {
-      console.log('No se encontraron publicaciones para el usuario especificado.');
       return res.status(404).json({ message: 'Publications not found' });
     }
-
-    console.log('Publicaciones encontradas:', publications);
     res.status(200).json(publications);
   } catch (error) {
-    console.error('Error al recuperar las publicaciones:', error);
     res.status(500).json({ message: 'Error retrieving publications', error: error.message });
   }
 };
 
-//PUBLICACIONES DE 1 USUARIO TODAS.
+
 
